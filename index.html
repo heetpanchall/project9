@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CommerceVerse | The Interactive Business World</title>
+<meta name="description" content="CommerceVerse is an interactive Class 11 GSEB Commerce project. Explore business, understand commerce, experience learning.">
+<meta name="theme-color" content="#070B1F">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #070B1F;
+    --bg-2: #0C1433;
+    --ink: #E8EDFF;
+    --muted: #9DABD3;
+    --line: rgba(160, 180, 255, 0.16);
+    --cyan: #22D3EE;
+    --blue: #60A5FA;
+    --violet: #A78BFA;
+    --orchid: #E879F9;
+    --gold: #FBBF24;
+    --display: "Sora", "Segoe UI", system-ui, sans-serif;
+    --body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+    --pad: clamp(16px, 5vw, 80px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body.lock { overflow: hidden; }
+
+  a { color: inherit; }
+  button { font: inherit; color: inherit; touch-action: manipulation; }
+  :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px max(var(--pad), env(safe-area-inset-right)) 8px max(var(--pad), env(safe-area-inset-left));
+    min-height: 62px;
+    background: rgba(7, 11, 31, 0.96);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-family: var(--display); font-weight: 800; letter-spacing: 0.05em;
+    text-decoration: none; font-size: 1rem;
+    display: flex; align-items: center; gap: 10px; min-height: 48px;
+  }
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 8px; flex: none;
+    background: linear-gradient(135deg, var(--cyan), var(--violet));
+    position: relative;
+  }
+  .brand-mark::after {
+    content: ""; position: absolute; left: 7px; bottom: 6px;
+    width: 4px; height: 12px; background: var(--bg); border-radius: 1px;
+    box-shadow: 6px -4px 0 var(--bg), 12px 3px 0 var(--bg);
+  }
+
+  .topnav { display: none; align-items: center; gap: 22px; }
+  .topnav a, .topnav button {
+    background: none; border: 0; cursor: pointer; text-decoration: none;
+    color: var(--muted); font-weight: 600; font-size: 0.95rem;
+    padding: 10px 2px; transition: color .2s;
+  }
+  .topnav .divider { width: 1px; height: 22px; background: var(--line); }
+
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    min-height: 48px; padding: 0 16px;
+    border-radius: 12px; border: 1px solid var(--line);
+    background: rgba(255,255,255,0.05); cursor: pointer;
+    font-family: var(--display); font-weight: 700; font-size: 0.95rem;
+  }
+  .bars { width: 18px; height: 14px; position: relative; display: block; }
+  .bars i {
+    position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px;
+    background: var(--ink); transition: transform .2s, opacity .2s, top .2s;
+  }
+  .bars i:nth-child(1) { top: 0; }
+  .bars i:nth-child(2) { top: 6px; }
+  .bars i:nth-child(3) { top: 12px; }
+  .menu-btn[aria-expanded="true"] .bars i:nth-child(1) { top: 6px; transform: rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .bars i:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] .bars i:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: #0A1030;
+    border-bottom: 1px solid var(--line);
+    max-height: calc(100vh - 64px); overflow-y: auto;
+    padding: 6px max(var(--pad), env(safe-area-inset-right)) 18px max(var(--pad), env(safe-area-inset-left));
+    box-shadow: 0 24px 40px rgba(0,0,0,0.45);
+  }
+  .mobile-menu.open { display: block; }
+  .mm-link {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; min-height: 54px; padding: 0 4px;
+    background: none; border: 0; border-bottom: 1px solid var(--line);
+    text-align: left; text-decoration: none; cursor: pointer;
+    font-family: var(--display); font-weight: 600; font-size: 1.02rem;
+  }
+  .mm-link:active { background: rgba(255,255,255,0.06); }
+  .mm-dot { width: 12px; height: 12px; border-radius: 4px; background: var(--c); flex: none; }
+  .mm-title { margin: 16px 0 2px; color: var(--muted); font-size: 0.95rem; font-weight: 700; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: clamp(32px, 8vw, 100px) var(--pad) 0;
+    background:
+      radial-gradient(900px 420px at 80% -10%, rgba(139, 92, 246, 0.30), transparent 70%),
+      radial-gradient(800px 420px at 10% 0%, rgba(34, 211, 238, 0.16), transparent 70%),
+      linear-gradient(180deg, #0A1030 0%, var(--bg) 100%);
+    overflow: hidden;
+  }
+  .hero-text { max-width: 1200px; position: relative; z-index: 2; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(1.7rem, 8vw, 6.2rem);
+    line-height: 1.05; letter-spacing: 0;
+    max-width: 100%;
+    background: linear-gradient(95deg, #FFFFFF 10%, #A5E8FF 45%, #B9A6FF 90%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .tagline {
+    margin-top: 16px;
+    font-family: var(--display); font-weight: 500;
+    font-size: clamp(1.02rem, 2.6vw, 1.5rem);
+    color: #C9D4FF; line-height: 1.45;
+  }
+  .hero-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    font-family: var(--display); font-weight: 700; font-size: 1rem;
+    text-decoration: none; cursor: pointer; text-align: center;
+    min-height: 48px; padding: 12px 24px; border-radius: 12px; border: 1px solid transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn-main {
+    color: #04121F;
+    background: linear-gradient(100deg, var(--cyan), var(--blue));
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.22);
+  }
+  .btn-ghost { color: var(--ink); border-color: var(--line); background: rgba(255,255,255,0.05); }
+  .btn:active { transform: scale(0.97); }
+
+  /* =====================================================
+     THE 3D CITY (CSS 3D transforms, no WebGL, no libraries)
+     ===================================================== */
+  .city {
+    --hz: 36%;
+    position: relative; overflow: hidden;
+    margin: clamp(14px, 3vw, 34px) calc(var(--pad) * -1) 0;
+    background: #070B1F;
+    contain: layout paint;
+  }
+  .sky {
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 60% 22% at 50% var(--hz), rgba(34,211,238,.30), transparent 72%),
+      radial-gradient(ellipse 36% 24% at 84% var(--hz), rgba(139,92,246,.38), transparent 70%),
+      linear-gradient(180deg, #050818 0, #0A1042 calc(var(--hz) - 22%), #27208A calc(var(--hz) - 7%),
+        #3555C4 var(--hz), #1B2A82 calc(var(--hz) + 9%), #0A1040 calc(var(--hz) + 26%), #070B1F 100%);
+  }
+  .moon {
+    position: absolute; left: 10%; top: 3.5%; width: 44px; height: 44px; border-radius: 50%;
+    background: radial-gradient(circle at 36% 34%, #FFFFFF, #CFE1FF 55%, #8DA3EE);
+    box-shadow: 0 0 46px 10px rgba(150,185,255,.32);
+  }
+  .stars i {
+    position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff;
+  }
+  .layer {
+    position: absolute; left: -3%; width: 106%; pointer-events: none;
+    will-change: transform;
+    transition: transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .layer svg { display: block; }
+
+  .stage {
+    position: absolute; left: 50%; top: 0;
+    transform-origin: 50% 0;
+    perspective: 900px; perspective-origin: 50% 9%;
+  }
+  .world {
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+    transform-style: preserve-3d; transform-origin: 50% 70%;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  .vignette {
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(7,11,31,.75), rgba(7,11,31,0) 12%, rgba(7,11,31,0) 88%, rgba(7,11,31,.75)),
+      linear-gradient(180deg, #0A1030 0, rgba(10,16,48,0) 12%, rgba(7,11,31,0) 90%, #070B1F 100%);
+  }
+
+  /* Ground, road and pavement */
+  .ground {
+    position: absolute; left: -900px; width: 3000px; height: 1100px;
+    transform-origin: 50% 0; transform: translateZ(200px) rotateX(-90deg);
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(90deg, rgba(110,140,255,.07) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(180deg, rgba(110,140,255,.07) 0 1px, transparent 1px 48px),
+      linear-gradient(180deg,
+        #05081B 0, #070B22 116px,
+        #4B5FE0 116px, #2C3CA4 119px,
+        #1B2878 119px, #1B2878 130px,
+        #121C5A 130px, #101A55 250px,
+        #0C1442 250px, rgba(12,20,66,.92) 480px, rgba(12,20,66,.55) 760px, rgba(12,20,66,0) 1060px);
+  }
+  .ground .dash {
+    position: absolute; left: 0; right: 0; top: 56px; height: 4px; opacity: .75;
+    background: repeating-linear-gradient(90deg, #7C8DFF 0 70px, transparent 70px 140px);
+  }
+  .lamp {
+    position: absolute; width: 56px; height: 88px; pointer-events: none;
+    background: radial-gradient(circle at 50% 24px, rgba(120,230,255,.42), transparent 30px);
+  }
+  .lamp::before {
+    content: ""; position: absolute; left: 26px; bottom: 0; width: 4px; height: 64px; border-radius: 2px;
+    background: linear-gradient(180deg, #5B6CE0, #1C2680);
+  }
+  .lamp::after {
+    content: ""; position: absolute; left: 20px; top: 21px; width: 16px; height: 5px; border-radius: 3px;
+    background: #B9F3FF; box-shadow: 0 0 10px #5CE1FF;
+  }
+  .tree { position: absolute; width: 24px; height: 36px; pointer-events: none; }
+  .tree::before {
+    content: ""; position: absolute; left: 2px; top: 0; width: 20px; height: 20px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #9BF5E8, #1FB7B0 60%, #0E5F7A);
+    box-shadow: 0 0 14px rgba(45,212,191,.5);
+  }
+  .tree::after {
+    content: ""; position: absolute; left: 11px; bottom: 0; width: 3px; height: 18px; background: #2B3C9E;
+  }
+  .car {
+    position: absolute; width: 48px; height: 13px; pointer-events: none;
+    border-radius: 7px 7px 3px 3px; border-left: 3px solid #FF5A6E;
+    background: linear-gradient(180deg, #3A4DC0, #1A2575);
+  }
+  .car::before {
+    content: ""; position: absolute; left: 10px; top: 2px; width: 22px; height: 5px; border-radius: 3px; background: #0A1240;
+  }
+  .car::after {
+    content: ""; position: absolute; right: -2px; top: 6px; width: 4px; height: 3px;
+    background: #FFE9A8; box-shadow: 0 0 10px 3px rgba(255,225,150,.65);
+  }
+  .slab {
+    position: absolute; left: 12px; width: 336px; height: 84px; pointer-events: none;
+    transform-origin: 50% 0; transform: translateZ(16px) rotateX(-90deg);
+    border-radius: 8px;
+    background:
+      repeating-linear-gradient(90deg, rgba(110,140,255,.10) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(180deg, rgba(110,140,255,.10) 0 1px, transparent 1px 28px),
+      linear-gradient(180deg, #1A2878, #0F1850);
+    box-shadow: inset 0 0 0 1px rgba(120,150,255,.4);
+  }
+
+  /* ---------- A building: front, left, right and roof faces ---------- */
+  .bldg {
+    position: absolute; transform-style: preserve-3d;
+    transform: translateZ(var(--z, 0px));
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    pointer-events: auto; cursor: pointer; outline: none;
+  }
+  .bldg.back { pointer-events: none; cursor: default; }
+  .tier { position: absolute; transform-style: preserve-3d; }
+
+  .f { position: absolute; background: var(--fc); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+       --litgrad: linear-gradient(180deg, rgba(var(--rgb),.95) 0%, rgba(205,235,255,.9) 45%, rgba(var(--rgb),.8) 100%); }
+  .front { left: 0; top: 0; width: 100%; height: 100%; --fc: #111D68; box-shadow: inset 0 0 0 1px rgba(var(--rgb),.38); }
+  .left  { top: 0; left: calc(var(--d) * -1); width: var(--d); height: 100%;
+           transform-origin: 100% 50%; transform: rotateY(-90deg); --fc: #18288A; }
+  .right { top: 0; left: 100%; width: var(--d); height: 100%;
+           transform-origin: 0 50%; transform: rotateY(90deg); --fc: #0A1244; }
+  .roof  { left: 0; top: calc(var(--d) * -1); width: 100%; height: var(--d);
+           transform-origin: 50% 100%; transform: rotateX(90deg); --fc: #26358F;
+           background:
+             repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 2px, transparent 2px 16px),
+             linear-gradient(135deg, rgba(var(--rgb),.55), rgba(40,60,170,.95) 62%);
+           box-shadow: inset 0 0 0 2px rgba(var(--rgb),.6); }
+
+  /* Illuminated windows. Gaps use the wall colour, so only the lit panes show. */
+  .front::before, .left::before, .right::before {
+    content: ""; position: absolute; left: 6px; right: 6px; top: 10px; bottom: 10px;
+    background-position: var(--ox, 0px) var(--oy, 0px);
+    background:
+      repeating-linear-gradient(90deg, var(--fc) 0 5px, transparent 5px 14px),
+      repeating-linear-gradient(180deg, var(--fc) 0 8px, transparent 8px 20px),
+      repeating-linear-gradient(180deg, transparent 0 var(--r1,60px), var(--fc) var(--r1,60px) var(--r2,100px), transparent var(--r2,100px) var(--r3,200px)),
+      repeating-linear-gradient(90deg, transparent 0 var(--c1,42px), var(--fc) var(--c1,42px) var(--c2,70px), transparent var(--c2,70px) var(--c3,154px)),
+      var(--litgrad);
+    opacity: var(--lo, 1);
+    animation: lightsOn 1s ease both; animation-delay: var(--dl, 0s);
+  }
+  .bands .front::before, .bands .left::before, .bands .right::before {
+    background:
+      repeating-linear-gradient(90deg, var(--fc) 0 4px, transparent 4px 64px),
+      repeating-linear-gradient(90deg, transparent 0 var(--c1,42px), var(--fc) var(--c1,42px) var(--c2,70px), transparent var(--c2,70px) var(--c3,154px)),
+      repeating-linear-gradient(180deg, var(--fc) 0 9px, transparent 9px 24px),
+      repeating-linear-gradient(180deg, transparent 0 var(--r1,60px), var(--fc) var(--r1,60px) var(--r2,100px), transparent var(--r2,100px) var(--r3,200px)),
+      var(--litgrad);
+  }
+  .lines .front::before, .lines .left::before, .lines .right::before {
+    background:
+      repeating-linear-gradient(180deg, var(--fc) 0 6px, transparent 6px 70px),
+      repeating-linear-gradient(180deg, transparent 0 var(--r1,60px), var(--fc) var(--r1,60px) var(--r2,100px), transparent var(--r2,100px) var(--r3,200px)),
+      repeating-linear-gradient(90deg, var(--fc) 0 5px, transparent 5px 11px),
+      repeating-linear-gradient(90deg, transparent 0 var(--c1,42px), var(--fc) var(--c1,42px) var(--c2,70px), transparent var(--c2,70px) var(--c3,154px)),
+      var(--litgrad);
+  }
+  .panes .front::before, .panes .left::before, .panes .right::before {
+    background:
+      repeating-linear-gradient(90deg, var(--fc) 0 3px, transparent 3px 30px),
+      repeating-linear-gradient(180deg, var(--fc) 0 3px, transparent 3px 38px),
+      repeating-linear-gradient(180deg, transparent 0 var(--r1,60px), var(--fc) var(--r1,60px) var(--r2,100px), transparent var(--r2,100px) var(--r3,200px)),
+      repeating-linear-gradient(90deg, transparent 0 var(--c1,42px), var(--fc) var(--c1,42px) var(--c2,70px), transparent var(--c2,70px) var(--c3,154px)),
+      var(--litgrad);
+  }
+
+  /* Glass sheen, edge light and distance haze on every face */
+  .f::after {
+    content: ""; position: absolute; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none;
+    background:
+      linear-gradient(rgba(34,48,150,var(--fog,0)), rgba(34,48,150,var(--fog,0))),
+      linear-gradient(115deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.04) 38%, transparent 52%, rgba(255,255,255,.07) 80%, transparent 100%),
+      linear-gradient(180deg, rgba(var(--rgb),.14) 0%, transparent 35%, rgba(3,5,25,.55) 100%);
+  }
+  .right::after {
+    background:
+      linear-gradient(rgba(34,48,150,var(--fog,0)), rgba(34,48,150,var(--fog,0))),
+      linear-gradient(180deg, rgba(var(--rgb),.08) 0%, transparent 35%, rgba(3,5,25,.6) 100%);
+  }
+  .roof::after { background: linear-gradient(rgba(34,48,150,var(--fog,0)), rgba(34,48,150,var(--fog,0))); }
+
+  .lobby {
+    position: absolute; left: 14%; width: 72%; bottom: 0; height: 20px;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 18px, rgba(5,8,30,.6) 18px 20px),
+      linear-gradient(180deg, rgba(var(--rgb),.35), rgba(var(--rgb),.95));
+    box-shadow: 0 0 24px rgba(var(--rgb),.7), inset 0 0 0 1px rgba(255,255,255,.25);
+  }
+  .spire {
+    position: absolute; width: 3px; pointer-events: none;
+    background: linear-gradient(180deg, rgb(var(--rgb)), rgba(var(--rgb),.1));
+  }
+  .spire::before {
+    content: ""; position: absolute; left: -2px; top: -3px; width: 7px; height: 7px; border-radius: 50%;
+    background: rgb(var(--rgb)); box-shadow: 0 0 12px 3px rgba(var(--rgb),.8);
+  }
+
+  /* Light and shadow on the ground around each building */
+  .shade {
+    position: absolute; left: -14px; top: calc(100% - 2px); width: calc(100% + 28px); height: calc(var(--d0) + 44px);
+    transform-origin: 50% 0; transform: translateX(16px) translateZ(18px) rotateX(-90deg); pointer-events: none;
+    background: radial-gradient(ellipse 62% 72% at 50% 40%, rgba(1,3,16,.8), rgba(1,3,16,0) 100%);
+  }
+  .pool {
+    position: absolute; left: -30px; top: calc(100% - 3px); width: calc(100% + 60px); height: calc(var(--d0) + 120px);
+    transform-origin: 50% 0; transform: translateZ(70px) rotateX(-90deg); pointer-events: none;
+    background: radial-gradient(ellipse 55% 45% at 50% 20%, rgba(var(--rgb),.38), transparent 75%);
+  }
+
+  /* The name label above (or below, on phones) each building */
+  .tag {
+    position: absolute; left: 50%; transform: translateX(-50%) translateZ(2px);
+    white-space: nowrap; text-align: center;
+    padding: 7px 14px 8px; border-radius: 12px;
+    background: rgba(8,13,44,.9); border: 1px solid rgba(var(--rgb),.75);
+    font-family: var(--display); line-height: 1.25;
+    animation: tagIn .6s ease 2.3s both;
+    transition: box-shadow .25s, background .25s;
+  }
+  .tag b { display: block; font-size: 15px; font-weight: 700; color: #fff; }
+  .tag small { display: block; font-family: var(--body); font-size: 12px; color: #B7C4F5; }
+  .tag::after {
+    content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 14px;
+    background: linear-gradient(rgba(var(--rgb),.95), transparent);
+  }
+
+  .bldg:active { transform: translate3d(0, -3px, calc(var(--z, 0px) + 10px)); }
+  .bldg:focus-visible .tag { box-shadow: 0 0 0 3px #fff; }
+  .bldg:focus-visible .front { box-shadow: inset 0 0 0 2px #fff; }
+
+  @keyframes lightsOn { from { opacity: 0; } to { opacity: var(--lo, 1); } }
+  @keyframes tagIn {
+    from { opacity: 0; transform: translateX(-50%) translateZ(2px) translateY(8px); }
+    to   { opacity: 1; transform: translateX(-50%) translateZ(2px); }
+  }
+
+  /* Phone version of the city: fewer shapes, larger labels under the buildings */
+  .phone .tag {
+    top: calc(100% + 16px); width: 112px; white-space: normal; padding: 6px 6px 7px;
+    border-radius: 10px;
+  }
+  .phone .tag b { font-size: 13.5px; line-height: 1.2; }
+  .phone .tag small { display: none; }
+  .phone .tag::after { display: none; }
+  .phone .front::before, .phone .left::before, .phone .right::before { animation: none; }
+  .phone .tag { animation: none; }
+
+  .scene-hint { text-align: center; color: var(--muted); font-size: 1rem; padding: 14px var(--pad) 28px; }
+
+  /* Mouse-only effects */
+  @media (hover: hover) {
+    .bldg:hover { transform: translate3d(0, -8px, calc(var(--z, 0px) + 22px)); }
+    .bldg:hover .front { box-shadow: inset 0 0 0 2px rgba(var(--rgb),.95), 0 0 38px rgba(var(--rgb),.5); }
+    .bldg:hover .front::before, .bldg:hover .left::before, .bldg:hover .right::before { filter: brightness(1.3); }
+    .bldg:hover .tag { background: rgba(14,22,70,.98); box-shadow: 0 0 22px rgba(var(--rgb),.55); }
+    .topnav a:hover, .topnav button:hover { color: var(--ink); }
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(34, 211, 238, 0.4); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .card:hover { transform: translateY(-6px); border-color: var(--a); box-shadow: 0 18px 44px rgba(var(--rgb), 0.28); }
+    .card:hover .card-icon { transform: scale(1.1) rotate(-4deg); }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(40px, 8vw, 100px) var(--pad); }
+  .section-head { max-width: 720px; margin-bottom: clamp(22px, 4vw, 44px); }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.55rem, 4.4vw, 2.5rem); line-height: 1.18; margin-bottom: 12px;
+  }
+  .lead { color: var(--muted); max-width: 62ch; }
+
+  #welcome { background: var(--bg); border-top: 1px solid var(--line); }
+  .welcome-grid { display: grid; gap: clamp(24px, 5vw, 64px); grid-template-columns: 1.1fr 1fr; align-items: start; }
+  .welcome-grid > * { min-width: 0; }
+  .welcome-grid p { max-width: 58ch; color: #C3CEF2; }
+  .welcome-grid p + p { margin-top: 14px; }
+  .subjects { list-style: none; display: grid; gap: 12px; }
+  .subjects li {
+    padding: 14px 18px; border-radius: 14px;
+    border: 1px solid var(--line);
+    background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+    display: flex; flex-direction: column;
+    border-left: 4px solid var(--c);
+  }
+  .subjects strong { font-family: var(--display); font-size: 1.02rem; }
+  .subjects span { color: var(--muted); font-size: 1rem; }
+
+  #modules { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%); }
+  .cards { display: grid; gap: 16px; grid-template-columns: repeat(6, 1fr); }
+  .card {
+    grid-column: span 2; min-width: 0;
+    position: relative; text-align: left; cursor: pointer;
+    padding: 24px 22px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(260px 160px at 100% 0%, rgba(var(--rgb), 0.20), transparent 70%),
+      linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    display: flex; flex-direction: column; gap: 8px; min-height: 240px;
+  }
+  .card:nth-child(4), .card:nth-child(5) { grid-column: span 3; }
+  .card:active { transform: scale(0.98); border-color: var(--a); }
+  .card-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    display: grid; place-items: center;
+    background: rgba(var(--rgb), 0.16);
+    border: 1px solid rgba(var(--rgb), 0.45);
+    margin-bottom: 6px;
+    transition: transform .3s ease;
+  }
+  .card-icon svg { width: 30px; height: 30px; stroke: var(--a); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .card h3 { font-family: var(--display); font-size: 1.3rem; line-height: 1.2; }
+  .card .subject { color: var(--a); font-weight: 700; font-size: 1rem; }
+  .card p { color: var(--muted); font-size: 1rem; flex: 1; }
+  .card .open {
+    font-family: var(--display); font-weight: 700; font-size: 0.95rem; color: var(--a);
+    padding-top: 10px; border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Preview panel ---------- */
+  dialog {
+    margin: auto; width: min(560px, calc(100vw - 28px));
+    border: 1px solid var(--a, var(--cyan)); border-radius: 22px;
+    background: #0E1639; color: var(--ink);
+    padding: 0; overflow: hidden;
+    box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+  }
+  dialog::backdrop { background: rgba(3, 6, 20, 0.8); }
+  dialog[open] { animation: pop .26s ease; }
+  @keyframes pop { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
+  @keyframes sheet { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .dlg-top { height: 6px; background: var(--a, var(--cyan)); }
+  .dlg-body { padding: 24px clamp(18px, 5vw, 32px) 26px; max-height: 82vh; overflow-y: auto; overscroll-behavior: contain; }
+  .dlg-body h3 { font-family: var(--display); font-size: 1.55rem; line-height: 1.2; }
+  .dlg-subject { color: var(--a); font-weight: 700; margin: 4px 0 12px; }
+  .dlg-body p { color: #C3CEF2; }
+  .dlg-body h4 { font-family: var(--display); font-size: 1.02rem; margin: 20px 0 8px; }
+  .dlg-body ul { padding-left: 22px; color: #C3CEF2; }
+  .dlg-body li { margin-bottom: 6px; }
+  .dlg-status {
+    margin-top: 20px; padding: 12px 16px; border-radius: 12px;
+    background: rgba(var(--rgb), 0.14);
+    border: 1px solid rgba(var(--rgb), 0.4);
+    font-size: 1rem;
+  }
+  .dlg-actions { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+  footer {
+    padding: 30px var(--pad) calc(40px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--muted); font-size: 1rem;
+    display: flex; flex-wrap: wrap; gap: 8px 30px; justify-content: space-between;
+  }
+  footer strong { font-family: var(--display); color: var(--ink); }
+
+  /* ---------- Wide screens: full navigation bar ---------- */
+  @media (min-width: 1100px) {
+    .topnav { display: flex; }
+    .menu-btn { display: none; }
+    .mobile-menu, .mobile-menu.open { display: none; }
+  }
+
+  /* ---------- Tablet ---------- */
+  @media (max-width: 980px) {
+    .welcome-grid { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .card, .card:nth-child(4), .card:nth-child(5) { grid-column: span 1; }
+    .card:nth-child(5) { grid-column: span 2; }
+  }
+
+  /* ---------- Phone ---------- */
+  @media (max-width: 620px) {
+    body { font-size: 1rem; }
+    .cards { grid-template-columns: 1fr; gap: 14px; }
+    .card, .card:nth-child(4), .card:nth-child(5) { grid-column: span 1; min-height: 0; }
+    .hero-actions .btn { flex: 1 1 100%; }
+    .brand .word { font-size: 0.92rem; }
+
+    dialog {
+      width: 100%; max-width: 100%; margin: auto 0 0 0;
+      border-radius: 22px 22px 0 0; border-bottom: 0;
+    }
+    dialog[open] { animation: sheet .24s ease; }
+    .dlg-body { max-height: 86vh; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+    .dlg-actions .btn { flex: 1 1 100%; }
+  }
+  @media (max-width: 340px) {
+    .brand .word { display: none; }
+  }
+
+  /* People who prefer less motion */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .front::before, .left::before, .right::before, .tag { animation: none; }
+    .world, .layer, .bldg, .card, .card-icon, .btn, .bars i, .tag { transition: none; }
+    dialog[open] { animation: none; }
+  }
+
+  /* ---------- Business City popup (a separate dialog that holds an iframe) ---------- */
+  #bc-popup {
+    padding: 0; margin: auto; overflow: hidden; max-width: none; max-height: none;
+    width: min(1280px, calc(100vw - 32px));
+    height: calc(100vh - 32px); height: calc(100dvh - 32px);
+    border: 1px solid rgba(34, 211, 238, 0.45); border-radius: 20px;
+    background: #070B1F; color: var(--ink);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+  }
+  #bc-popup[open] { display: flex; flex-direction: column; animation: bcp-pop .22s ease; }
+  #bc-popup::backdrop { background: rgba(3, 6, 20, 0.82); }
+  @keyframes bcp-pop { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+  .bcp-bar {
+    flex: none; display: flex; align-items: center; gap: 12px;
+    min-height: 56px; padding: 6px 8px 6px 18px;
+    background: #0A1030; border-bottom: 1px solid var(--line);
+  }
+  .bcp-mark { flex: none; width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(135deg, var(--cyan), var(--violet)); }
+  .bcp-title { flex: 1; margin: 0; font-family: var(--display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; line-height: 1.2; }
+  .bcp-close {
+    flex: none; display: inline-flex; align-items: center; gap: 8px;
+    min-height: 44px; padding: 0 16px; cursor: pointer;
+    font-family: var(--display); font-weight: 700; font-size: 0.95rem;
+    border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.06);
+    transition: background .2s;
+  }
+  .bcp-close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+  .bcp-close:active { transform: scale(0.97); }
+  .bcp-stage { position: relative; flex: 1 1 auto; min-height: 0; background: #070B1F; }
+  .bcp-frame { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; display: block; background: #070B1F; }
+  .bcp-loading { position: absolute; left: 0; right: 0; top: 40%; margin: 0; text-align: center; color: var(--muted); font-family: var(--display); font-weight: 600; }
+  @media (hover: hover) { .bcp-close:hover { background: rgba(255,255,255,0.12); } }
+  @media (max-width: 620px) {
+    #bc-popup { width: 100vw; height: 100vh; height: 100dvh; margin: 0; border: 0; border-radius: 0; }
+    .bcp-bar { padding-top: max(6px, env(safe-area-inset-top)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #bc-popup[open] { animation: none; }
+    .bcp-close { transition: none; }
+  }
+
+  /* ---------- Popup for Accounts Lab, Market Simulator, English Studio and Escape Room (shares the .bcp-* parts) ---------- */
+  #mod-popup { padding: 0; margin: auto; overflow: hidden; max-width: none; max-height: none; width: min(1280px, calc(100vw - 32px)); height: calc(100vh - 32px); height: calc(100dvh - 32px); border: 1px solid rgba(34, 211, 238, 0.45); border-radius: 20px; background: #070B1F; color: var(--ink); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6); }
+  #mod-popup[open] { display: flex; flex-direction: column; animation: bcp-pop .22s ease; }
+  #mod-popup::backdrop { background: rgba(3, 6, 20, 0.82); }
+  @media (max-width: 620px) { #mod-popup { width: 100vw; height: 100vh; height: 100dvh; margin: 0; border: 0; border-radius: 0; } }
+  @media (prefers-reduced-motion: reduce) { #mod-popup[open] { animation: none; } }
+</style>
+</head>
+
+<body>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top" aria-label="CommerceVerse home">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="word">COMMERCEVERSE</span>
+  </a>
+
+  <nav class="topnav" aria-label="Main">
+    <a href="#welcome">Welcome</a>
+    <a href="#modules">Modules</a>
+    <span class="divider" aria-hidden="true"></span>
+    <span id="nav-mods" style="display:contents"></span>
+  </nav>
+
+  <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span>Menu</span>
+  </button>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a class="mm-link" href="#welcome">Welcome</a>
+    <a class="mm-link" href="#modules">All modules</a>
+    <p class="mm-title">Go to a module</p>
+    <div id="mm-mods"></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1>COMMERCEVERSE</h1>
+      <p class="tagline">Explore Business. Understand Commerce. Experience Learning.</p>
+      <div class="hero-actions">
+        <a class="btn btn-main" href="#modules">Enter the city</a>
+        <a class="btn btn-ghost" href="#welcome">About this project</a>
+      </div>
+    </div>
+
+    <div class="city" id="city" role="group"
+         aria-label="A night city with five glowing buildings. Each building opens one learning module.">
+      <div class="sky"><div class="moon"></div><div class="stars" id="stars"></div></div>
+      <div class="layer" id="far"></div>
+      <div class="layer" id="mid"></div>
+      <div class="stage" id="stage"><div class="world" id="world"></div></div>
+      <div class="vignette"></div>
+    </div>
+    <p class="scene-hint" id="scene-hint">Select any building to see what is inside.</p>
+  </div>
+
+  <section id="welcome">
+    <div class="welcome-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:18px">
+          <h2>Welcome to your business world</h2>
+        </div>
+        <p>CommerceVerse turns Class 11 Commerce into a place you can walk around in. Visit a city of real businesses, test your accounting, move a market with a slider, read about Diwali across India, and then try to escape the quiz room.</p>
+        <p>This project follows the Class 11 GSEB Commerce course, in English medium. Pick any module in any order. There is nothing to sign up for.</p>
+      </div>
+      <ul class="subjects" aria-label="Subjects covered">
+        <li style="--c: var(--cyan)"><strong>Organisation of Commerce</strong><span>Explore public, private and global enterprises in Business City.</span></li>
+        <li style="--c: var(--blue)"><strong>Accountancy</strong><span>Practise debit and credit rules in the Accounts Lab.</span></li>
+        <li style="--c: var(--violet)"><strong>Economics</strong><span>Change demand and supply in the Market Simulator.</span></li>
+        <li style="--c: var(--orchid)"><strong>English</strong><span>Read and learn figures of speech in the English Studio.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="modules">
+    <div class="section-head">
+      <h2>Choose where to go</h2>
+      <p class="lead">Five places to learn in. Select a card, or a building in the city above, to see what is inside.</p>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div><strong>CommerceVerse</strong> is a Class 11 GSEB Commerce school project.</div>
+  <div>Explore Business. Understand Commerce. Experience Learning.</div>
+</footer>
+
+<!-- Preview panel (opens when a card, building or menu item is selected) -->
+<dialog id="panel" aria-labelledby="panel-title">
+  <div class="dlg-top"></div>
+  <div class="dlg-body">
+    <h3 id="panel-title"></h3>
+    <p class="dlg-subject" id="panel-subject"></p>
+    <p id="panel-desc"></p>
+    <h4>What you will find inside</h4>
+    <ul id="panel-list"></ul>
+    <div class="dlg-status" id="panel-status"></div>
+    <div class="dlg-actions">
+      <button class="btn btn-main" type="button" id="panel-close">Back to the city</button>
+      <button class="btn btn-ghost" type="button" id="panel-next">Show next module</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Business City popup: the module opens here inside an iframe (homepage stays visible behind it) -->
+<dialog id="bc-popup" aria-labelledby="bcp-title">
+  <div class="bcp-bar">
+    <span class="bcp-mark" aria-hidden="true"></span>
+    <h2 class="bcp-title" id="bcp-title">BUSINESS CITY</h2>
+    <button type="button" class="bcp-close" id="bcp-close" aria-label="Close Business City">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <span>Close</span>
+    </button>
+  </div>
+  <div class="bcp-stage">
+    <p class="bcp-loading" id="bcp-loading" role="status" hidden>Loading Business City...</p>
+    <iframe class="bcp-frame" id="bcp-frame" title="Business City: explore the world of enterprises"></iframe>
+  </div>
+</dialog>
+
+<!-- Shared popup for modules 2 to 5: one dialog, the iframe loads the chosen module -->
+<dialog id="mod-popup" aria-labelledby="modp-title">
+  <div class="bcp-bar">
+    <span class="bcp-mark" aria-hidden="true"></span>
+    <h2 class="bcp-title" id="modp-title">MODULE</h2>
+    <button type="button" class="bcp-close" id="modp-close" aria-label="Close module">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <span>Close</span>
+    </button>
+  </div>
+  <div class="bcp-stage">
+    <p class="bcp-loading" id="modp-loading" role="status" hidden>Loading...</p>
+    <iframe class="bcp-frame" id="modp-frame" title="Module"></iframe>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- The five modules: one list used everywhere ---------- */
+  var modules = [
+    {
+      name: "Business City", scene: "Business City", subject: "Organisation of Commerce",
+      color: "#22D3EE", rgb: "34,211,238", day: "Days 2 and 3",
+      short: "Walk through a city of public, private and global enterprises.",
+      desc: "A virtual city where every building is a real enterprise. Select a building to learn what the business does and how it works.",
+      topics: ["Five public sector enterprises", "Five private sector enterprises", "Five global enterprises", "A detailed report on one selected enterprise", "A business unit case study: difficulties and solutions"],
+      icon: '<path d="M4 21V9l6-3v15M10 21V4l10 4v13M2 21h20M13 11h4M13 15h4"/>'
+    },
+    {
+      name: "Accounts Lab", scene: "Accounts Lab", subject: "Accountancy",
+      color: "#60A5FA", rgb: "96,165,250", day: "Day 4",
+      short: "Learn debit and credit rules by trying real transactions.",
+      desc: "A hands-on lab where you learn how accounts work, then practise on example transactions and get an instant explanation for every answer.",
+      topics: ["Types of accounts", "Traditional and modern debit and credit rules", "Interactive transaction examples", "Practice questions with instant feedback"],
+      icon: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M16 11v4"/>'
+    },
+    {
+      name: "Market Simulator", scene: "Market Simulator", subject: "Economics",
+      color: "#A78BFA", rgb: "167,139,250", day: "Day 5",
+      short: "Move demand and supply and watch the market react.",
+      desc: "See how prices are set. Slide demand and supply up or down and watch the graph change as it happens.",
+      topics: ["Demand and supply concepts", "An interactive graph with sliders", "A Reliance Industries case study from reliable sources", "Types of markets with examples in a table"],
+      icon: '<path d="M3 3v18h18"/><path d="M6 8c4 0 7 4 12 10M6 18c4 0 7-4 12-10"/>'
+    },
+    {
+      name: "English Studio", scene: "English Studio", subject: "English",
+      color: "#E879F9", rgb: "232,121,249", day: "Day 6",
+      short: "Read about Diwali in India and explore figures of speech.",
+      desc: "A reading and language space. Read an essay on how Diwali is celebrated across India, then explore figures of speech with examples.",
+      topics: ["Essay: Diwali in Incredible India", "The cultural diversity of Diwali celebrations", "An interactive chart of figures of speech with examples"],
+      icon: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8z"/>'
+    },
+    {
+      name: "Commerce Escape Room", scene: "Escape Room", subject: "All four subjects",
+      color: "#FBBF24", rgb: "251,191,36", day: "Day 7",
+      short: "Answer questions from every subject to unlock the exit.",
+      desc: "A quiz game that tests everything you explored. Solve challenges level by level to find your way out.",
+      topics: ["Questions from all four subjects", "Multiple difficulty levels", "Instant feedback and explanations", "Points, progress and a completion screen"],
+      icon: '<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3M12 14v3"/>'
+    }
+  ];
+
+  var current = 0;
+  var panel = document.getElementById("panel");
+  var menuBtn = document.getElementById("menu-btn");
+  var menu = document.getElementById("mobile-menu");
+
+  /* ---------- Cards ---------- */
+  var cardsBox = document.getElementById("cards");
+  modules.forEach(function (m, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "card";
+    b.style.setProperty("--a", m.color);
+    b.style.setProperty("--rgb", m.rgb);
+    b.innerHTML =
+      '<span class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true">' + m.icon + '</svg></span>' +
+      '<h3>' + m.name + '</h3>' +
+      '<span class="subject">' + m.subject + '</span>' +
+      '<p>' + m.short + '</p>' +
+      '<span class="open">See what is inside</span>';
+    b.addEventListener("click", function () { openPanel(i); });
+    cardsBox.appendChild(b);
+  });
+
+  /* ---------- Navigation (wide bar and phone menu) ---------- */
+  var navMods = document.getElementById("nav-mods");
+  var mmMods = document.getElementById("mm-mods");
+  modules.forEach(function (m, i) {
+    var nb = document.createElement("button");
+    nb.type = "button";
+    nb.textContent = m.scene;
+    nb.addEventListener("click", function () { openPanel(i); });
+    navMods.appendChild(nb);
+
+    var mb = document.createElement("button");
+    mb.type = "button";
+    mb.className = "mm-link";
+    mb.innerHTML = '<span class="mm-dot" style="--c:' + m.color + '"></span><span>' + m.name + '</span>';
+    mb.addEventListener("click", function () { closeMenu(); openPanel(i); });
+    mmMods.appendChild(mb);
+  });
+
+  function closeMenu() {
+    menu.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+  }
+  menuBtn.addEventListener("click", function () {
+    var open = menu.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  menu.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest("a")) closeMenu();
+  });
+  document.addEventListener("click", function (e) {
+    if (menu.classList.contains("open") && !document.getElementById("topbar").contains(e.target)) closeMenu();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMenu();
+  });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth >= 1100) closeMenu();
+  });
+
+  /* =====================================================
+     THE 3D CITY
+     Every building is built from flat panels that CSS turns into 3D.
+     ===================================================== */
+  var city = document.getElementById("city");
+  var stage = document.getElementById("stage");
+  var world = document.getElementById("world");
+  var farBox = document.getElementById("far");
+  var midBox = document.getElementById("mid");
+  var starsBox = document.getElementById("stars");
+  var hint = document.getElementById("scene-hint");
+
+  var phoneQuery = window.matchMedia("(max-width: 859px)");
+  var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Size and position settings for the large-screen and phone cities
+  var CFG = {
+    desk:  { w: 1200, h: 600, max: 1.4, ground: 480, tilt: -8,  persp: "900px", po: "50% 9%", hz: "36%", farBase: 215, farH: 170, midBase: 262, midH: 150 },
+    phone: { w: 360,  h: 556, max: 1.5, tilt: -11, persp: "800px", po: "50% 9%", hz: "30%", farBase: 150, farH: 100, midBase: 182, midH: 88 }
+  };
+
+  // The five module buildings (large screens). Each tier is one stacked block.
+  var DESK = [
+    { x: 100, tiers: [{ w: 112, h: 235, d: 84 }, { w: 76, h: 60, d: 54 }], spire: 30, style: "grid" },
+    { x: 305, tiers: [{ w: 150, h: 160, d: 96 }, { w: 92, h: 26, d: 58 }], spire: 0,  style: "bands" },
+    { x: 535, tiers: [{ w: 96, h: 268, d: 72 }, { w: 62, h: 52, d: 46 }],  spire: 38, style: "lines" },
+    { x: 755, tiers: [{ w: 120, h: 200, d: 88 }, { w: 74, h: 34, d: 56 }], spire: 0,  style: "panes" },
+    { x: 970, tiers: [{ w: 130, h: 140, d: 92 }, { w: 80, h: 24, d: 54 }], spire: 16, style: "grid" }
+  ];
+  // Quiet buildings further back (large screens only)
+  var DESK_BACK = [
+    { x: -60,  z: -240, style: "grid",  rgb: "120,170,255", tiers: [{ w: 120, h: 230, d: 80 }] },
+    { x: 140,  z: -420, style: "lines", rgb: "170,140,255", tiers: [{ w: 100, h: 260, d: 70 }, { w: 64, h: 50, d: 44 }] },
+    { x: 300,  z: -300, style: "panes", rgb: "90,210,255",  tiers: [{ w: 110, h: 215, d: 80 }] },
+    { x: 520,  z: -520, style: "grid",  rgb: "150,150,255", tiers: [{ w: 100, h: 300, d: 70 }, { w: 60, h: 46, d: 40 }] },
+    { x: 650,  z: -330, style: "bands", rgb: "110,190,255", tiers: [{ w: 120, h: 235, d: 80 }] },
+    { x: 830,  z: -470, style: "lines", rgb: "180,140,255", tiers: [{ w: 110, h: 280, d: 70 }, { w: 66, h: 44, d: 44 }] },
+    { x: 960,  z: -280, style: "grid",  rgb: "100,200,255", tiers: [{ w: 100, h: 210, d: 80 }] },
+    { x: 1110, z: -380, style: "panes", rgb: "140,160,255", tiers: [{ w: 120, h: 250, d: 80 }] }
+  ];
+  // The five buildings on a phone: two rows
+  var PHONE = [
+    { x: 30,  base: 250, tiers: [{ w: 66, h: 96, d: 30 }, { w: 44, h: 26, d: 20 }], spire: 14, style: "grid" },
+    { x: 145, base: 250, tiers: [{ w: 70, h: 78, d: 34 }, { w: 46, h: 16, d: 22 }], spire: 0,  style: "bands" },
+    { x: 258, base: 250, tiers: [{ w: 60, h: 120, d: 28 }, { w: 38, h: 34, d: 18 }], spire: 18, style: "lines" },
+    { x: 81,  base: 440, tiers: [{ w: 78, h: 84, d: 34 }, { w: 48, h: 18, d: 22 }], spire: 0,  style: "panes" },
+    { x: 198, base: 440, tiers: [{ w: 84, h: 70, d: 36 }, { w: 56, h: 16, d: 22 }], spire: 10, style: "grid" }
+  ];
+
+  function seeded(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function n(v) { return Math.round(v * 10) / 10; }
+
+  // Random-looking window pattern settings for one block
+  function lightVars(rand) {
+    var r1 = 20 * (2 + Math.floor(rand() * 4)), r2 = r1 + 20 * (1 + Math.floor(rand() * 3)), r3 = r2 + 20 * (2 + Math.floor(rand() * 4));
+    var c1 = 14 * (2 + Math.floor(rand() * 4)), c2 = c1 + 14 * (1 + Math.floor(rand() * 2)), c3 = c2 + 14 * (3 + Math.floor(rand() * 4));
+    return "--r1:" + r1 + "px;--r2:" + r2 + "px;--r3:" + r3 + "px;--c1:" + c1 + "px;--c2:" + c2 + "px;--c3:" + c3 +
+           "px;--ox:" + Math.floor(rand() * 14) + "px;--oy:" + Math.floor(rand() * 20) + "px;--dl:" + (0.4 + rand() * 1.8).toFixed(2) + "s;";
+  }
+
+  function tierHTML(t, W0, D0, y0, vars, lobby) {
+    var left = (W0 - t.w) / 2, z = -(D0 - t.d) / 2;
+    return '<div class="tier" style="left:' + n(left) + 'px;bottom:' + y0 + 'px;width:' + t.w + 'px;height:' + t.h +
+           'px;--d:' + t.d + 'px;transform:translateZ(' + n(z) + 'px);' + vars + '">' +
+           '<div class="f front">' + (lobby ? '<i class="lobby"></i>' : '') + '</div>' +
+           '<div class="f left"></div><div class="f right"></div><div class="f roof"></div></div>';
+  }
+
+  // One building (clickable module building, or a quiet background block)
+  function buildingHTML(sp, i, rand, o) {
+    var tiers = sp.tiers, W0 = tiers[0].w, D0 = tiers[0].d, H = 0, y0 = 0, inner = "", m = (i >= 0) ? modules[i] : null;
+    tiers.forEach(function (t) { H += t.h; });
+    var rgb = m ? m.rgb : sp.rgb;
+    var st = "left:" + sp.x + "px;top:" + (o.ground - H) + "px;width:" + W0 + "px;height:" + H + "px;--z:" + (o.z || 0) + "px;--d0:" + D0 + "px;--rgb:" + rgb + ";";
+    if (o.back) st += "--fog:" + Math.min(0.62, 0.22 - (o.z || 0) / 1100).toFixed(2) + ";--lo:0.6;";
+
+    tiers.forEach(function (t, k) {
+      inner += tierHTML(t, W0, D0, y0, lightVars(rand), k === 0 && !o.back);
+      y0 += t.h;
+    });
+    inner = '<div class="shade"></div>' + (o.back ? "" : '<div class="pool"></div>') + inner;
+
+    if (sp.spire) {
+      inner += '<i class="spire" style="height:' + sp.spire + 'px;top:' + (-sp.spire) + 'px;left:' + n(W0 / 2 - 1.5) + 'px;transform:translateZ(' + n(-D0 / 2) + 'px)"></i>';
+    }
+    if (m) {
+      var tagTop = o.phone ? "calc(100% + 16px)" : (-(sp.spire + 66)) + "px";
+      inner += '<div class="tag" style="top:' + tagTop + '"><b>' + m.name + '</b><small>' + m.subject + '</small></div>';
+    }
+    var attrs = m ? 'role="button" tabindex="0" data-i="' + i + '" aria-label="Open ' + m.name + ', ' + m.subject + '"' : 'aria-hidden="true"';
+    return '<div class="' + (o.back ? "bldg back " : "bldg ") + sp.style + '" ' + attrs + ' style="' + st + '">' + inner + '</div>';
+  }
+
+  // Distant skyline silhouettes (one lightweight picture each)
+  function skyline(id, seed, H, top, bot, minW, varW, gap, windows) {
+    var rand = seeded(seed), x = 0, s = "";
+    s += '<svg viewBox="0 0 1600 ' + H + '" preserveAspectRatio="xMidYMax slice" width="100%" height="100%" aria-hidden="true">' +
+         '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + top + '"/><stop offset="1" stop-color="' + bot + '"/></linearGradient></defs>';
+    while (x < 1600) {
+      var w = minW + rand() * varW, h = H * (0.28 + rand() * 0.52), y = H - h, kind = rand();
+      if (kind < 0.25) {
+        s += '<rect x="' + n(x) + '" y="' + n(y) + '" width="' + n(w) + '" height="' + n(h) + '" fill="url(#' + id + ')"/>' +
+             '<rect x="' + n(x + w * 0.2) + '" y="' + n(y - h * 0.2) + '" width="' + n(w * 0.6) + '" height="' + n(h * 0.2 + 1) + '" fill="url(#' + id + ')"/>';
+      } else if (kind < 0.4) {
+        s += '<polygon points="' + n(x) + ',' + n(y + 14) + ' ' + n(x + w) + ',' + n(y) + ' ' + n(x + w) + ',' + n(H) + ' ' + n(x) + ',' + n(H) + '" fill="url(#' + id + ')"/>';
+      } else if (kind < 0.52) {
+        s += '<rect x="' + n(x) + '" y="' + n(y) + '" width="' + n(w) + '" height="' + n(h) + '" fill="url(#' + id + ')"/>' +
+             '<rect x="' + n(x + w / 2 - 1) + '" y="' + n(y - 22) + '" width="2" height="23" fill="url(#' + id + ')"/>';
+      } else {
+        s += '<rect x="' + n(x) + '" y="' + n(y) + '" width="' + n(w) + '" height="' + n(h) + '" fill="url(#' + id + ')"/>';
+      }
+      if (windows) {
+        var cnt = Math.floor(w * h / 1100);
+        for (var k = 0; k < cnt; k++) {
+          s += '<rect x="' + n(x + 4 + rand() * (w - 12)) + '" y="' + n(y + 6 + rand() * (h - 14)) + '" width="3" height="5" fill="' + (rand() < 0.5 ? "#7DE7FF" : "#B7A6FF") + '" opacity="0.55"/>';
+        }
+      }
+      x += w + rand() * gap;
+    }
+    return s + '</svg>';
+  }
+
+  function drawStars(count) {
+    var rand = seeded(11), s = "";
+    for (var i = 0; i < count; i++) {
+      s += '<i style="left:' + (rand() * 100).toFixed(1) + '%;top:' + (rand() * 28).toFixed(1) + '%;opacity:' + (0.25 + rand() * 0.6).toFixed(2) + '"></i>';
+    }
+    starsBox.innerHTML = s;
+  }
+
+  var isPhone = false, cfg = CFG.desk, tx = 0, ty = 0, raf = 0, scaleNow = 1;
+
+  function deskWorld() {
+    var rand = seeded(2026), h = "";
+    h += '<div class="ground" style="top:' + cfg.ground + 'px"><i class="dash"></i></div>';
+    DESK_BACK.forEach(function (sp) { h += buildingHTML(sp, -1, rand, { ground: cfg.ground, z: sp.z, back: true }); });
+    [250, 495, 690, 920, 40, 1150].forEach(function (x) {
+      h += '<i class="lamp" style="left:' + (x - 26) + 'px;top:' + (cfg.ground - 88) + 'px;transform:translateZ(62px)"></i>';
+    });
+    [215, 440, 700, 890, 1130].forEach(function (x) {
+      h += '<i class="tree" style="left:' + (x - 12) + 'px;top:' + (cfg.ground - 36) + 'px;transform:translateZ(50px)"></i>';
+    });
+    [180, 640, 1000].forEach(function (x) {
+      h += '<i class="car" style="left:' + x + 'px;top:' + (cfg.ground - 13) + 'px;transform:translateZ(118px)"></i>';
+    });
+    DESK.forEach(function (sp, i) { h += buildingHTML(sp, i, rand, { ground: cfg.ground, z: 0 }); });
+    return h;
+  }
+  function phoneWorld() {
+    var rand = seeded(77), h = "";
+    h += '<div class="slab" style="top:250px"></div><div class="slab" style="top:440px"></div>';
+    PHONE.forEach(function (sp, i) { h += buildingHTML(sp, i, rand, { ground: sp.base, z: 0, phone: true }); });
+    return h;
+  }
+
+  function applyTilt() {
+    raf = 0;
+    world.style.transform = "rotateX(" + (cfg.tilt - ty * 2.2).toFixed(2) + "deg) rotateY(" + (tx * 5.5).toFixed(2) + "deg)";
+    farBox.style.transform = "translate3d(" + (-tx * 6).toFixed(1) + "px,0,0)";
+    midBox.style.transform = "translate3d(" + (-tx * 14).toFixed(1) + "px,0,0)";
+  }
+
+  function layout() {
+    var w = city.clientWidth || window.innerWidth;
+    var s = Math.min(w / cfg.w, cfg.max);
+    scaleNow = s;
+    city.style.height = Math.round(cfg.h * s) + "px";
+    stage.style.width = cfg.w + "px";
+    stage.style.height = cfg.h + "px";
+    stage.style.transform = "translateX(-50%) scale(" + s + ")";
+    farBox.style.top = Math.round((cfg.farBase - cfg.farH) * s) + "px";
+    farBox.style.height = Math.round(cfg.farH * s) + "px";
+    midBox.style.top = Math.round((cfg.midBase - cfg.midH) * s) + "px";
+    midBox.style.height = Math.round(cfg.midH * s) + "px";
+  }
+
+  function drawCity() {
+    isPhone = phoneQuery.matches;
+    cfg = isPhone ? CFG.phone : CFG.desk;
+    city.className = "city " + (isPhone ? "phone" : "desk");
+    city.style.setProperty("--hz", cfg.hz);
+    stage.style.perspective = cfg.persp;
+    stage.style.perspectiveOrigin = cfg.po;
+    world.style.transition = "none";
+    tx = 0; ty = 0;
+    world.style.transform = "rotateX(" + cfg.tilt + "deg) rotateY(0deg)";
+    farBox.style.transform = "none"; midBox.style.transform = "none";
+    world.innerHTML = isPhone ? phoneWorld() : deskWorld();
+    farBox.innerHTML = skyline("gfar", 5, cfg.farH, "#1F2C8C", "#3452BA", 26, 52, 14, false);
+    midBox.innerHTML = skyline("gmid", 9, cfg.midH, "#121A60", "#25369A", 22, 40, 10, true);
+    drawStars(isPhone ? 18 : 34);
+    layout();
+    // allow smooth movement again after the first placement
+    window.setTimeout(function () { world.style.transition = ""; }, 60);
+    hint.textContent = isPhone
+      ? "Tap any building to see what is inside."
+      : "Move your mouse across the city to look around. Select any building to see what is inside.";
+  }
+
+  drawCity();
+  if (phoneQuery.addEventListener) phoneQuery.addEventListener("change", drawCity);
+  else if (phoneQuery.addListener) phoneQuery.addListener(drawCity);
+
+  var resizeTimer = 0;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(layout, 100);
+  });
+
+  // Gentle camera movement with the mouse (not on touch screens, not with reduced motion)
+  city.addEventListener("pointermove", function (e) {
+    if (e.pointerType === "touch" || isPhone || motionQuery.matches) return;
+    var r = city.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    if (!raf) raf = window.requestAnimationFrame(applyTilt);
+  });
+  city.addEventListener("pointerleave", function () {
+    if (isPhone || motionQuery.matches) return;
+    tx = 0; ty = 0;
+    if (!raf) raf = window.requestAnimationFrame(applyTilt);
+  });
+
+  function bldgFrom(el) {
+    while (el && el !== city) {
+      if (el.classList && el.classList.contains("bldg") && el.getAttribute("data-i") !== null) return el;
+      el = el.parentNode;
+    }
+    return null;
+  }
+  city.addEventListener("click", function (e) {
+    var b = bldgFrom(e.target);
+    if (b) openPanel(parseInt(b.getAttribute("data-i"), 10));
+  });
+  city.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      var b = bldgFrom(e.target);
+      if (b) { e.preventDefault(); openPanel(parseInt(b.getAttribute("data-i"), 10)); }
+    }
+  });
+
+  /* ---------- Preview panel ---------- */
+  function fillPanel(i) {
+    var m = modules[i];
+    current = i;
+    panel.style.setProperty("--a", m.color);
+    panel.style.setProperty("--rgb", m.rgb);
+    document.getElementById("panel-title").textContent = m.name;
+    document.getElementById("panel-subject").textContent = m.subject;
+    document.getElementById("panel-desc").textContent = m.desc;
+    var list = document.getElementById("panel-list");
+    list.innerHTML = "";
+    m.topics.forEach(function (t) {
+      var li = document.createElement("li");
+      li.textContent = t;
+      list.appendChild(li);
+    });
+    document.getElementById("panel-status").textContent =
+      "This module is being built on " + m.day + " of the project. Come back soon to explore it.";
+  }
+
+  function openPanel(i) {
+    // Business City (module 0) now opens in its own popup instead of this preview
+    if (i === 0) { openBusinessCity(); return; }
+    if (MOD_URLS[i]) { openModule(i); return; }
+    fillPanel(i);
+    if (typeof panel.showModal === "function") {
+      if (!panel.open) panel.showModal();
+    } else {
+      panel.setAttribute("open", "");
+    }
+    syncScrollLock();
+  }
+  function closePanel() {
+    if (typeof panel.close === "function") panel.close();
+    else panel.removeAttribute("open");
+    syncScrollLock();
+  }
+
+  document.getElementById("panel-close").addEventListener("click", closePanel);
+  document.getElementById("panel-next").addEventListener("click", function () {
+    var next = (current + 1) % modules.length;
+    // Going past the last preview wraps to Business City, which has its own popup
+    if (next === 0) { openBusinessCity(true); return; }
+    fillPanel(next);
+  });
+  panel.addEventListener("click", function (e) {
+    if (e.target === panel) closePanel();
+  });
+  panel.addEventListener("close", function () {
+    syncScrollLock();
+  });
+
+  /* =====================================================
+     BUSINESS CITY POPUP
+     Business City lives in its own page (business-city/business-city.html).
+     It opens here, inside an iframe in a separate dialog, so the homepage
+     stays visible behind it and nobody is taken to another page.
+     ===================================================== */
+  var BC_URL = "business-city/business-city.html";
+  var BC_CLOSE_TYPE = "commerceverse:close-business-city"; // the only message we accept
+  var bcPopup = document.getElementById("bc-popup");
+  var bcFrame = document.getElementById("bcp-frame");
+  var bcCloseBtn = document.getElementById("bcp-close");
+  var bcLoading = document.getElementById("bcp-loading");
+  var bcTrigger = null; // the button that opened the popup, so focus can go back to it
+
+  // The homepage may scroll only when no dialog is open
+  function syncScrollLock() {
+    document.body.classList.toggle("lock", !!(panel.open || bcPopup.open || modPopup.open));
+  }
+
+  function openBusinessCity(fromPreview) {
+    // If the old preview panel is open, close it cleanly first
+    if (panel.open) { closePanel(); fromPreview = true; }
+    if (bcPopup.open) return;
+    bcTrigger = fromPreview ? null : document.activeElement;
+    // Load the page only the first time it is needed
+    if (!bcFrame.getAttribute("src")) {
+      bcLoading.hidden = false;
+      bcFrame.setAttribute("src", BC_URL);
+    }
+    if (typeof bcPopup.showModal === "function") bcPopup.showModal();
+    else bcPopup.setAttribute("open", "");
+    syncScrollLock();
+    bcCloseBtn.focus();
+  }
+
+  function afterBusinessCityClosed() {
+    syncScrollLock();
+    var t = bcTrigger;
+    bcTrigger = null;
+    if (t && t.isConnected) { try { t.focus(); } catch (err) { /* ignore */ } }
+    // The trigger may be gone (the city was redrawn) or hidden (phone menu): use the Business City card
+    if (!t || !t.isConnected || document.activeElement !== t) {
+      var card = cardsBox.querySelector(".card");
+      if (card) card.focus({ preventScroll: true });
+    }
+  }
+
+  function closeBusinessCity() {
+    if (!bcPopup.open) return;
+    if (typeof bcPopup.close === "function") bcPopup.close(); // the "close" event below does the clean-up
+    else { bcPopup.removeAttribute("open"); afterBusinessCityClosed(); }
+  }
+
+  bcCloseBtn.addEventListener("click", closeBusinessCity);
+  bcPopup.addEventListener("close", afterBusinessCityClosed);
+  bcFrame.addEventListener("load", function () {
+    if (bcFrame.getAttribute("src")) bcLoading.hidden = true;
+  });
+  // Clicking the dark area around the popup closes it
+  bcPopup.addEventListener("click", function (e) {
+    var r = bcPopup.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeBusinessCity();
+  });
+  // A close request from inside the iframe (its own Back button or the Escape key)
+  window.addEventListener("message", function (e) {
+    // Same website only. (A page opened straight from a folder reports the origin "null".)
+    var expectedOrigin = window.location.protocol === "file:" ? "null" : window.location.origin;
+    if (e.origin !== expectedOrigin) return;
+    if (e.source !== bcFrame.contentWindow) return;       // only our own iframe
+    if (!e.data || e.data.type !== BC_CLOSE_TYPE) return; // only the expected message
+    closeBusinessCity();
+  });
+
+  /* =====================================================
+     POPUP FOR MODULES 2 TO 5
+     Accounts Lab, Market Simulator, English Studio and Commerce Escape Room open here,
+     in the same way as Business City: an iframe in a dialog, closed by Close, Escape,
+     the dark area or a message from the module (same website, our iframe, exact type).
+     ===================================================== */
+  var MOD_URLS = { 1: "accounts-lab/accounts-lab.html", 2: "market-simulator/market-simulator.html", 3: "english-studio/english-studio.html", 4: "escape-room/escape-room.html" };
+  var MOD_TYPES = { 1: "commerceverse:close-accounts-lab", 2: "commerceverse:close-market-simulator", 3: "commerceverse:close-english-studio", 4: "commerceverse:close-escape-room" };
+  var modPopup = document.getElementById("mod-popup");
+  var modFrame = document.getElementById("modp-frame");
+  var modCloseBtn = document.getElementById("modp-close");
+  var modLoading = document.getElementById("modp-loading");
+  var modTitle = document.getElementById("modp-title");
+  var modIdx = 0, modTrigger = null;
+
+  function openModule(i) {
+    var fromPreview = false;
+    if (panel.open) { closePanel(); fromPreview = true; }
+    if (modPopup.open || bcPopup.open) return;
+    modTrigger = fromPreview ? null : document.activeElement;
+    modIdx = i;
+    modTitle.textContent = modules[i].name.toUpperCase();
+    modFrame.setAttribute("title", modules[i].name + ": " + modules[i].subject);
+    if (modFrame.getAttribute("data-url") !== MOD_URLS[i]) {   // load a module only when first needed or when switching
+      modLoading.hidden = false;
+      modFrame.setAttribute("data-url", MOD_URLS[i]);
+      modFrame.setAttribute("src", MOD_URLS[i]);
+    }
+    if (typeof modPopup.showModal === "function") modPopup.showModal();
+    else modPopup.setAttribute("open", "");
+    syncScrollLock();
+    modCloseBtn.focus();
+  }
+  function afterModuleClosed() {
+    syncScrollLock();
+    var t = modTrigger;
+    modTrigger = null;
+    if (t && t.isConnected) { try { t.focus(); } catch (err) { /* ignore */ } }
+    if (!t || !t.isConnected || document.activeElement !== t) {
+      var cs = cardsBox.querySelectorAll(".card"), c = cs[modIdx];
+      if (c) c.focus({ preventScroll: true });
+    }
+  }
+  function closeModule() {
+    if (!modPopup.open) return;
+    if (typeof modPopup.close === "function") modPopup.close();
+    else { modPopup.removeAttribute("open"); afterModuleClosed(); }
+  }
+  modCloseBtn.addEventListener("click", closeModule);
+  modPopup.addEventListener("close", afterModuleClosed);
+  modFrame.addEventListener("load", function () { if (modFrame.getAttribute("src")) modLoading.hidden = true; });
+  modPopup.addEventListener("click", function (e) {
+    var r = modPopup.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeModule();
+  });
+  window.addEventListener("message", function (e) {
+    var expectedOrigin = window.location.protocol === "file:" ? "null" : window.location.origin;
+    if (e.origin !== expectedOrigin) return;
+    if (e.source !== modFrame.contentWindow) return;
+    if (!e.data || e.data.type !== MOD_TYPES[modIdx]) return;
+    closeModule();
+  });
+})();
+</script>
+</body>
+</html>

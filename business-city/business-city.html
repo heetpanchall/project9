@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Business City | CommerceVerse</title>
+<meta name="description" content="Business City: explore 15 public sector, private sector and global enterprises for Class 11 GSEB Commerce.">
+<meta name="theme-color" content="#070B1F">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="business-city.css">
+</head>
+
+<body class="bc-body">
+<a class="bc-skip" href="#bc-main">Skip to the enterprises</a>
+
+<header class="bc-top">
+  <div class="bc-top-inner">
+    <div class="bc-brand">
+      <span class="bc-brand-mark" aria-hidden="true"></span>
+      <span class="bc-brand-text">BUSINESS CITY</span>
+    </div>
+    <a class="bc-btn bc-btn-ghost" href="../index.html">Back to CommerceVerse</a>
+  </div>
+</header>
+
+<main id="bc-main" class="bc-main">
+
+  <div id="bc-intro">
+  <!-- ===== Introduction ===== -->
+  <section class="bc-hero" aria-labelledby="bc-title">
+    <div class="bc-hero-text">
+      <h1 id="bc-title" class="bc-h1">Business City</h1>
+      <p class="bc-subtitle">Explore the World of Enterprises</p>
+      <p class="bc-lead">Fifteen real enterprises live in this city. Search for one, filter by type, and open its profile to learn what it does, who owns it and why it matters in commerce. This is part of your Class 11 GSEB Commerce project (Organisation of Commerce).</p>
+    </div>
+    <svg class="bc-skyline" viewBox="0 0 1200 90" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="bc-sky-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3B5BDB" stop-opacity="0.6"/>
+          <stop offset="1" stop-color="#7C3AED" stop-opacity="0.12"/>
+        </linearGradient>
+      </defs>
+      <g fill="url(#bc-sky-grad)">
+        <rect x="6" y="44" width="30" height="46"/>
+        <rect x="40" y="36" width="38" height="54"/>
+        <rect x="82" y="60" width="26" height="30"/>
+        <rect x="112" y="28" width="38" height="62"/>
+        <rect x="156" y="52" width="26" height="38"/>
+        <rect x="190" y="44" width="42" height="46"/>
+        <rect x="238" y="12" width="30" height="78"/>
+        <rect x="272" y="52" width="34" height="38"/>
+        <rect x="310" y="12" width="34" height="78"/>
+        <rect x="350" y="52" width="30" height="38"/>
+        <rect x="386" y="20" width="34" height="70"/>
+        <rect x="428" y="60" width="34" height="30"/>
+        <rect x="470" y="20" width="34" height="70"/>
+        <rect x="510" y="52" width="42" height="38"/>
+        <rect x="556" y="36" width="30" height="54"/>
+        <rect x="592" y="12" width="26" height="78"/>
+        <rect x="626" y="60" width="34" height="30"/>
+        <rect x="666" y="20" width="42" height="70"/>
+        <rect x="714" y="52" width="42" height="38"/>
+        <rect x="762" y="28" width="38" height="62"/>
+        <rect x="806" y="36" width="38" height="54"/>
+        <rect x="848" y="44" width="30" height="46"/>
+        <rect x="884" y="60" width="26" height="30"/>
+        <rect x="914" y="20" width="38" height="70"/>
+        <rect x="958" y="28" width="42" height="62"/>
+        <rect x="1008" y="20" width="38" height="70"/>
+        <rect x="1052" y="20" width="30" height="70"/>
+        <rect x="1086" y="36" width="26" height="54"/>
+        <rect x="1116" y="44" width="38" height="46"/>
+        <rect x="1158" y="36" width="34" height="54"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- ===== Statistics ===== -->
+  <section class="bc-stats" aria-label="Enterprise statistics">
+    <div class="bc-stat"><span class="bc-stat-num" id="bc-n-all">15</span><span class="bc-stat-label">Total enterprises</span></div>
+    <div class="bc-stat bc-cat-public"><span class="bc-stat-num" id="bc-n-public">5</span><span class="bc-stat-label">Public sector</span></div>
+    <div class="bc-stat bc-cat-private"><span class="bc-stat-num" id="bc-n-private">5</span><span class="bc-stat-label">Private sector</span></div>
+    <div class="bc-stat bc-cat-global"><span class="bc-stat-num" id="bc-n-global">5</span><span class="bc-stat-label">Global enterprises</span></div>
+  </section>
+
+  </div>
+
+  <!-- ===== Views ===== -->
+  <div id="bc-list-view">
+
+    <details class="bc-guide">
+      <summary>How are enterprises classified here?</summary>
+      <div class="bc-guide-body">
+        <p><strong>Ownership</strong> tells you who owns and controls the enterprise. In the <strong>public sector</strong>, the Central or a State Government owns and controls it. In the <strong>private sector</strong>, individuals or shareholders own it.</p>
+        <p><strong>Reach</strong> tells you where it does business. A <strong>global enterprise</strong> (multinational) operates in more than one country. Reach is not a type of ownership: every global enterprise in this city is also owned by someone, and its profile says who.</p>
+        <p>A company whose shares can be bought on a stock exchange is called a <strong>listed company</strong>. Being listed does not make a company public sector. What matters is who holds the controlling ownership.</p>
+      </div>
+    </details>
+
+    <section class="bc-tools" aria-label="Search and filters">
+      <div class="bc-search">
+        <label class="bc-search-label" for="bc-search">Search enterprises</label>
+        <div class="bc-search-box">
+          <svg class="bc-search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="bc-search" class="bc-search-input" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Try: oil, bank, software, car" aria-describedby="bc-count">
+          <button id="bc-search-clear" class="bc-search-clear" type="button" aria-label="Clear search" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="bc-filters" role="group" aria-label="Filter by category">
+        <button type="button" class="bc-chip" data-cat="all" aria-pressed="true">All Enterprises</button>
+        <button type="button" class="bc-chip" data-cat="public" aria-pressed="false">Public Sector</button>
+        <button type="button" class="bc-chip" data-cat="private" aria-pressed="false">Private Sector</button>
+        <button type="button" class="bc-chip" data-cat="global" aria-pressed="false">Global Enterprises</button>
+      </div>
+    </section>
+
+    <p id="bc-count" class="bc-count" role="status" aria-live="polite">Showing 15 of 15 enterprises</p>
+
+    <section aria-label="Enterprises">
+      <div id="bc-grid" class="bc-grid"></div>
+
+      <div id="bc-empty" class="bc-empty" hidden>
+        <p class="bc-empty-title">No enterprise matches your search.</p>
+        <p class="bc-empty-text" id="bc-empty-text">Try a shorter word, such as a company name, an industry or a product.</p>
+        <div class="bc-empty-actions">
+          <button type="button" class="bc-btn bc-btn-main" id="bc-empty-clear">Clear search</button>
+          <button type="button" class="bc-btn bc-btn-ghost" id="bc-empty-all" hidden>Show all categories</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bc-about" aria-labelledby="bc-about-title">
+      <h2 id="bc-about-title" class="bc-h2">About the information</h2>
+      <p>Every profile lists its own sources at the bottom, with a label saying whether each source is an official document, a news or rating report, or a reference site. The information was checked on <strong>13 November 2026</strong>. Ownership figures such as shareholding percentages change when governments or companies buy and sell shares, so always check the company's latest filing before using a number in an exam answer or a report.</p>
+    </section>
+  </div>
+
+  <div id="bc-detail-view" hidden></div>
+</main>
+
+<footer class="bc-footer">
+  <p>Business City is part of CommerceVerse, a Class 11 GSEB Commerce school project. Company names and monograms are used for education only. The monograms are original designs, not company logos.</p>
+</footer>
+
+<noscript><p class="bc-noscript">Business City needs JavaScript to show the enterprises. Please turn JavaScript on in your browser.</p></noscript>
+<script src="business-city.js"></script>
+</body>
+</html>
